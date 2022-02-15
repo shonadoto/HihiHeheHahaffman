@@ -93,7 +93,20 @@ void Tree::OutTable(std::string out_file) {
   trout.close();
   trout.open(out_file);
   for (int i = 0; i < 256; ++i) {
-    trout << i << ' ' << table[i] << std::endl;
+    if (table[i].size()) {
+      if (i == '\n') {
+        trout << "\\n" << ' ' << table[i] << std::endl;
+      }
+      else if (i == '\t') {
+        trout << "\\t" << ' ' << table[i] << std::endl;
+      }
+      else if (i == ' ') {
+        trout << "hihi" << ' ' << table[i] << std::endl;
+      }
+      else {
+        trout << char(i) << ' ' << table[i] << std::endl;
+      }
+    }
   }
   trout.close();
 }
